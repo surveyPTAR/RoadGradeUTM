@@ -113,6 +113,14 @@
     .setContent(`<b>Your Location:</b><br>Lat: ${lat}, Lng: ${lng}`)
     .openOn(map);
 });       
+// SWEREF 99 TM with map's pixel origin at (218128.7031, 6126002.9379)
+var crs = new L.Proj.CRS('EPSG:32647',
+  '+proj=utm +zone=47 +datum=WGS84 +units=m +no_defs',
+  {
+    origin: [0, 0],
+    resolutions: [256, 128, 64, 32, 16, 8, 4, 2, 1] // 3 example zoom level resolutions
+  }
+);
         var measureControl = new L.Control.Measure({
             position: 'topleft',
             primaryLengthUnit: 'meters',
