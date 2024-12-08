@@ -104,8 +104,8 @@
                          // Add event listener to show a custom popup
                          map.on('locationfound', function (e) {
   const coords = e.latlng;
-  const easting = utmCoords[0].toFixed(2);
-  const northing = utmCoords[1].toFixed(2);
+  const lat = coords.lat.toFixed(5);
+  const lng = coords.lng.toFixed(5);
 
     // Add a Leaflet popup at the user's location
     L.popup()
