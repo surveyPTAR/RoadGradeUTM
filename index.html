@@ -101,27 +101,6 @@
             position: 'topleft'
         }).addTo(map);
         L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
-            // Extract Lat/Lng
-            var userLat = e.latitude;
-            var userLng = e.longitude;
-
-            // Convert to UTM
-            var utmCoords = convertToUTM(userLat, userLng);
-            var easting = utmCoords[0].toFixed(2); // Easting
-            var northing = utmCoords[1].toFixed(2); // Northing
-
-            // Add a popup at the user's location
-            var popupContent = `<b>You are here!</b><br>
-                                Lat: ${userLat.toFixed(5)}<br>
-                                Lng: ${userLng.toFixed(5)}<br>
-                                UTM Easting: ${easting} meters<br>
-                                UTM Northing: ${northing} meters`;
-
-            L.popup()
-                .setLatLng([userLat, userLng])
-                .setContent(popupContent)
-                .openOn(map);
-        
         var measureControl = new L.Control.Measure({
             position: 'topleft',
             primaryLengthUnit: 'meters',
