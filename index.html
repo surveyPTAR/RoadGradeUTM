@@ -103,26 +103,9 @@
         L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
                         // Add event listener to show a custom popup
                         map.on('locationfound', function (e) {
-  const latlng = e.latlng; // Get the latitude and longitude
-    const wgs84 = "+proj=longlat +datum=WGS84 +no_defs"; // Geographic (WGS84)
-    
-    // Dynamically determine UTM zone based on longitude
-    const utmZone = Math.floor((latlng.lng + 180) / 6) + 1; // Calculate UTM zone
-    const utmProj = `+proj=utm +zone=${utmZone} +datum=WGS84 +units=m +no_defs`; // UTM projection
-
-    // Convert to UTM
-    const utmCoords = proj4(wgs84, utmProj, [latlng.lng, latlng.lat]);
-
-    // Display the UTM coordinates in a popup
-    L.popup()
-        .setLatLng(latlng)
-        .setContent(
-            `Your UTM Coordinates:<br>` +
-            `Easting: ${utmCoords[0].toFixed(2)} m<br>` +
-            `Northing: ${utmCoords[1].toFixed(2)} m<br>` +
-            `Zone: ${utmZone}`
-        )
-        .openOn(map);
+  const coords = e.latlng;
+  const lat = coords.lat.toFixed(5);
+  const lng = coords.lng.toFixed(5);
 });      
         var measureControl = new L.Control.Measure({
             position: 'topleft',
