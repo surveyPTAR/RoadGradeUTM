@@ -101,6 +101,21 @@
             position: 'topleft'
         }).addTo(map);
         L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
+        // Define WGS84 and UTM coordinate systems using proj4
+        var wgs84 = "+proj=longlat +datum=WGS84 +no_defs";
+        var utmZone33N = "+proj=utm +zone=33 +datum=WGS84 +units=m +no_defs"; // Adjust the UTM zone as needed
+
+        // Add an event listener to show a popup with UTM coordinates
+        map.on('locationfound', function (e) {
+            var latlng = e.latlng; // Get the latitude and longitude
+            var utmCoords = proj4(wgs84, utmZone33N, [latlng.lng, latlng.lat]); // Convert to UTM
+
+            // Create a popup with UTM coordinates
+            L.popup()
+                .setLatLng(latlng) // Set the popup at the user's location
+                .setContent("Your location in UTM: <br>Easting: " + utmCoords[0].toFixed(2) + " m<br>Northing: " + utmCoords[1].toFixed(2) + " m")
+                .openOn(map); // Open the popup on the map
+        });        
         var measureControl = new L.Control.Measure({
             position: 'topleft',
             primaryLengthUnit: 'meters',
