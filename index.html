@@ -112,6 +112,11 @@
     .setLatLng(coords)
     .setContent(`<b>Your Location:</b><br>Lat: ${lat}, Lng: ${lng}`)
     .openOn(map);
+                    // Convert to UTM coordinates
+                    var utmCoords = latLngToUTM(lat, lng);
+                    var easting = utmCoords[0].toFixed(2);
+                    var northing = utmCoords[1].toFixed(2);    
+
 });       
         var measureControl = new L.Control.Measure({
             position: 'topleft',
