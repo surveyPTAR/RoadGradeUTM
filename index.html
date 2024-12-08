@@ -101,15 +101,11 @@
             position: 'topleft'
         }).addTo(map);
         L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
-        // Add an event listener to show a popup with UTM coordinates
         map.on('locationfound', function (e) {
-            var latlng = e.latlng; // Get the latitude and longitude
-            var utmCoords = proj4(wgs84, utmZone33N, [latlng.lng, latlng.lat]); // Convert to UTM
-
-            // Create a popup with UTM coordinates
+            var coords = e.latlng; // Latitude and longitude
             L.popup()
-                .setLatLng(latlng) // Set the popup at the user's location
-                .setContent("Your location in UTM: <br>Easting: " + utmCoords[0].toFixed(2) + " m<br>Northing: " + utmCoords[1].toFixed(2) + " m")
+                .setLatLng(coords) // Set the popup at the located position
+                .setContent("Coordinates:<br>Latitude: " + coords.lat.toFixed(6) + "<br>Longitude: " + coords.lng.toFixed(6))
                 .openOn(map); // Open the popup on the map
         });        
         var measureControl = new L.Control.Measure({
