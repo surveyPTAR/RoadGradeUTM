@@ -40,7 +40,6 @@
         <script src="js/proj4.js"></script>
         <script src="js/proj4leaflet.js"></script>
         <script src="data/241009_all_road_martabe_1.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.7.6/proj4.js"></script>
         <script>
         var highlightLayer;
         function highlightFeature(e) {
@@ -104,7 +103,6 @@
         L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
                         // Add event listener to show a custom popup
                         map.on('locationfound', function (e) {
-  const coords = e.latlng;
   const latlng = e.latlng; // Get the latitude and longitude
     const wgs84 = "+proj=longlat +datum=WGS84 +no_defs"; // Geographic (WGS84)
     
