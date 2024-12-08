@@ -106,11 +106,11 @@
   const coords = e.latlng;
   const lat = coords.lat.toFixed(5);
   const lng = coords.lng.toFixed(5);
-
+  
     // Add a Leaflet popup at the user's location
     L.popup()
     .setLatLng(coords)
-    .setContent(`<b>Your Location:</b><br>Lat: ${easting}, Lng: ${northing}`)
+    .setContent(`<b>Your Location:</b><br>Lat: ${lat}, Lng: ${lng}`)
     .openOn(map);
 });       
         var measureControl = new L.Control.Measure({
