@@ -101,20 +101,17 @@
             position: 'topleft'
         }).addTo(map);
         L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
-                         // Add event listener to show a custom popup
-                         map.on('locationfound', function (e) {
-                    var utmCoords = latLngToUTM(lat, lng);
-                    var easting = utmCoords[0].toFixed(2);
-                    var northing = utmCoords[1].toFixed(2);
-  
-                      // Add a marker and popup at the user's location
-                      var marker = L.marker([lat, lng]).addTo(map);
-                    marker.bindPopup(
-                        `<b>You are here!</b><br>
-                        UTM Coordinates:<br>
-                        Easting: ${easting}<br>
-                        Northing: ${northing}`
-                    ).openPopup();
+                        // Add event listener to show a custom popup
+                        map.on('locationfound', function (e) {
+  const coords = e.latlng;
+  const lat = coords.lat.toFixed(5);
+  const lng = coords.lng.toFixed(5);
+
+  // Add a Leaflet popup at the user's location
+  L.popup()
+    .setLatLng(coords)
+    .setContent(`<b>Your Location:</b><br>Lat: ${lat}, Lng: ${lng}`)
+    .openOn(map);
 });       
         var measureControl = new L.Control.Measure({
             position: 'topleft',
