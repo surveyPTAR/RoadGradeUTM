@@ -115,14 +115,6 @@
                         Easting: ${easting}<br>
                         Northing: ${northing}`
                     ).openPopup();
-                },
-                function (error) {
-                    alert("Unable to retrieve your location");
-                }
-            );
-        } else {
-            alert("Geolocation is not supported by your browser");
-        }
 });       
         var measureControl = new L.Control.Measure({
             position: 'topleft',
