@@ -113,14 +113,18 @@
     .setContent(`<b>Your Location:</b><br>Lat: ${lat}, Lng: ${lng}`)
     .openOn(map);
 });       
-// SWEREF 99 TM with map's pixel origin at (218128.7031, 6126002.9379)
-var crs = new L.Proj.CRS('EPSG:32647',
-  '+proj=utm +zone=47 +datum=WGS84 +units=m +no_defs',
-  {
-    origin: [0, 0],
-    resolutions: [256, 128, 64, 32, 16, 8, 4, 2, 1] // 3 example zoom level resolutions
-  }
-);
+// Convert Lat/Lng to UTM (EPSG:32647)
+var utmCoordinates = proj4(wgs84, utm47n, [lng, lat]); // Note: [lng, lat] order
+        var easting = utmCoordinates[0].toFixed(2); // Easting (X)
+        var northing = utmCoordinates[1].toFixed(2); // Northing (Y)
+
+        // Display the result
+        document.getElementById('output').innerHTML =
+            `<p>Lat/Lng: (${lat}, ${lng})</p>
+             <p>UTM Zone 47N (EPSG:32647):</p>
+             <p>Easting: ${easting} meters</p>
+             <p>Northing: ${northing} meters</p>`;
+             
         var measureControl = new L.Control.Measure({
             position: 'topleft',
             primaryLengthUnit: 'meters',
