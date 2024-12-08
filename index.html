@@ -103,9 +103,9 @@
         L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
                          // Add event listener to show a custom popup
                          map.on('locationfound', function (e) {
-  const utmCoords = latLngToUTM(lat, lng);
-  const easting = utmCoords[0].toFixed(2);
-  const northing = utmCoords[1].toFixed(2); 
+                    var utmCoords = latLngToUTM(lat, lng);
+                    var easting = utmCoords[0].toFixed(2);
+                    var northing = utmCoords[1].toFixed(2);
   
                       // Add a marker and popup at the user's location
                       var marker = L.marker([lat, lng]).addTo(map);
