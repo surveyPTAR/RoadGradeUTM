@@ -106,10 +106,6 @@
             position: 'topleft'
         }).addTo(map);
         L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
-        // Define WGS84 and UTM coordinate systems using proj4
-        var wgs84 = "+proj=longlat +datum=WGS84 +no_defs";
-        var utmZone47N = "+proj=utm +zone=47 +datum=WGS84 +units=m +no_defs"; // Adjust the UTM zone as needed
-
         // Add an event listener to show a popup with UTM coordinates
         map.on('locationfound', function (e) {
             var latlng = e.latlng; // Get the latitude and longitude
