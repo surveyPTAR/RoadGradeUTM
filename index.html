@@ -101,19 +101,18 @@
             position: 'topleft'
         }).addTo(map);
         L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
-   
-// Convert Lat/Lng to UTM (EPSG:32647)
-var utmCoordinates = proj4(wgs84, utm47n, [lng, lat]); // Note: [lng, lat] order
-        var easting = utmCoordinates[0].toFixed(2); // Easting (X)
-        var northing = utmCoordinates[1].toFixed(2); // Northing (Y)
-
-        // Display the result
-        document.getElementById('output').innerHTML =
-            `<p>Lat/Lng: (${lat}, ${lng})</p>
-             <p>UTM Zone 47N (EPSG:32647):</p>
-             <p>Easting: ${easting} meters</p>
-             <p>Northing: ${northing} meters</p>`;
-             
+                         // Add event listener to show a custom popup
+                         map.on('locationfound', function (e) {
+  const coords = e.latlng;
+  const lat = coords.lat.toFixed(5);
+  const lng = coords.lng.toFixed(5);
+  
+    // Add a Leaflet popup at the user's location
+    L.popup()
+    .setLatLng(coords)
+    .setContent(`<b>Your Location:</b><br>Lat: ${lat}, Lng: ${lng}`)
+    .openOn(map);
+});       
         var measureControl = new L.Control.Measure({
             position: 'topleft',
             primaryLengthUnit: 'meters',
