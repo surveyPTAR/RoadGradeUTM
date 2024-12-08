@@ -101,18 +101,7 @@
             position: 'topleft'
         }).addTo(map);
         L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
-                         // Add event listener to show a custom popup
-                         map.on('locationfound', function (e) {
-  const coords = e.latlng;
-  const lat = coords.lat.toFixed(5);
-  const lng = coords.lng.toFixed(5);
-  
-    // Add a Leaflet popup at the user's location
-    L.popup()
-    .setLatLng(coords)
-    .setContent(`<b>Your Location:</b><br>Lat: ${lat}, Lng: ${lng}`)
-    .openOn(map);
-});       
+   
 // Convert Lat/Lng to UTM (EPSG:32647)
 var utmCoordinates = proj4(wgs84, utm47n, [lng, lat]); // Note: [lng, lat] order
         var easting = utmCoordinates[0].toFixed(2); // Easting (X)
